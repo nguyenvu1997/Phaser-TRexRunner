@@ -1,6 +1,7 @@
 # Phaser-TRexRunner
 Phaser-TRexRunner
 
-```bash Demo
+# Demo
+```bash 
 https://phaser-trexrunner.herokuapp.com/
 ```
