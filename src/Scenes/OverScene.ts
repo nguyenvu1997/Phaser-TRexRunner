@@ -2,13 +2,13 @@ import { Score } from "../Objects/Score.js";
 
 export class OverScene extends Phaser.Scene {
 
-    dino;
-    ground;
+    dino: Phaser.GameObjects.Image;
+    ground: Phaser.GameObjects.TileSprite;
     width: number;
     height: number;
 
-    scoreText;
-    highScoreText;
+    scoreText: number;
+    highScoreText: number;
     score: Score;
     highScore: Score;
 

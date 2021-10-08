@@ -4,7 +4,7 @@ import { Player } from "../Objects/Player.js"
 export class OpenScene extends Phaser.Scene {
 
     dino: Player;
-    ground;
+    ground: Ground;
 
     width: number;
     height: number;

@@ -93,6 +93,9 @@ export class PlayScene extends Phaser.Scene {
         if (this.highScore.getScore() < this.score.getScore()) {
             this.highScore.update("Highscore");
         }
+        if (this.highScore.getScore() % 1000 == 0) {
+            this.reachSound.play();
+        }
         this.obstacles.spawn();
     }
 }

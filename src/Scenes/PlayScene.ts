@@ -14,18 +14,18 @@ export class PlayScene extends Phaser.Scene {
 
     obstacles: Obstacles;
 
-    jumpSound;
-    hitSound;
-    reachSound;
+    jumpSound: Phaser.Sound.BaseSound;
+    hitSound: Phaser.Sound.BaseSound;
+    reachSound: Phaser.Sound.BaseSound;
 
     width: number;
     height: number;
 
     score: Score;
     highScore: Score;
-    highScoreText;
+    highScoreText: number;
 
-    obstaclesGroup;
+    obstaclesGroup: Phaser.Physics.Arcade.Group;
 
     constructor() {
         super("Play Scene");
@@ -77,7 +77,7 @@ export class PlayScene extends Phaser.Scene {
         this.load.image('obsticle-6', 'assets/img/cactuses_big_3.png')
     }
 
-    init(data) {
+    init(data: {}) {
         this.highScoreText = data['highScore']
     }
 
@@ -133,7 +133,10 @@ export class PlayScene extends Phaser.Scene {
         this.ground.update();
         this.score.update("Score");
         if (this.highScore.getScore() < this.score.getScore()) {
-            this.highScore.update("Highscore")
+            this.highScore.update("Highscore");
+        }
+        if (this.highScore.getScore() % 1000 == 0){
+            this.reachSound.play();
         }
 
         this.obstacles.spawn();

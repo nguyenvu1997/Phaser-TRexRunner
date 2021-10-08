@@ -6,6 +6,6 @@ export class Ground extends Phaser.GameObjects.TileSprite {
         this.setOrigin(0, 1);
     }
     update() {
-        this.tilePositionX += 7;
+        this.tilePositionX += 6.7;
     }
 }

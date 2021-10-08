@@ -3,7 +3,7 @@ export class Obstacles {
     scene: Phaser.Scene;
     group: Phaser.Physics.Arcade.Group;
     spawnTimer: number;
-    obstacles;
+    obstacles: Phaser.Physics.Arcade.Sprite;
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
@@ -36,7 +36,6 @@ export class Obstacles {
         }
 
         this.spawnTimer++;
-
         return this.obstacles;
     }
 

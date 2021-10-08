@@ -16,7 +16,7 @@ export class Score extends Phaser.GameObjects.Text {
         this.scene.add.existing(this);
     }
 
-    update(text: string) {
+    update(text: string): void {
         this.score += 1
         this.setText(formatScore(text, this.score))
     }
