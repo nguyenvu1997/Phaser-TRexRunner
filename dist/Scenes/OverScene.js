@@ -1,14 +1,12 @@
-import { Score } from "./Score.js";
-export class GameOverScene extends Phaser.Scene {
+import { Score } from "../Objects/Score.js";
+export class OverScene extends Phaser.Scene {
     constructor() {
-        super("Game Over Scene");
+        super("Over Scene");
         this.dino = undefined;
     }
     init(data) {
         this.scoreText = data['score'];
         this.highScoreText = data['highScore'];
-        console.log(this.scoreText);
-        console.log(this.highScoreText);
     }
     preload() {
         this.load.image('dino-hurt', 'assets/img/dino-hurt.png');
@@ -18,11 +16,11 @@ export class GameOverScene extends Phaser.Scene {
     create() {
         this.width = this.game.config.width;
         this.height = this.game.config.height;
-        this.dino = this.add.image(50, 560, 'dino-hurt');
+        this.dino = this.add.image(350, this.height - 45, 'dino-hurt');
         this.ground = this.add.tileSprite(0, this.height, this.width, 25, 'ground');
         this.ground.setOrigin(0, 1);
-        this.score = this.createScore(16, 16, this.scoreText);
-        this.highScore = this.createHighScore(this.width - 300, 16, this.highScoreText);
+        this.score = new Score(this, 16, 16, this.scoreText, 'Score');
+        this.highScore = new Score(this, this.width - 300, 16, this.highScoreText, 'Highscore');
         const gameOver = this.add.image(800, 300, 'game-over');
         const restart = this.add.image(800, 350, 'restart');
         this.handleInput();
@@ -30,24 +28,10 @@ export class GameOverScene extends Phaser.Scene {
     handleInput() {
         this.input.keyboard.on('keydown', function (event) {
             if (event.code == 'Space') {
-                this.scene.start("Game Play Scene", {
+                this.scene.start("Play Scene", {
                     highScore: this.highScore.getScore()
                 });
             }
         }, this);
-    }
-    createHighScore(x, y, score) {
-        const style = { fontSize: '32px', fill: '#000' };
-        const label = new Score(this, x, y, score, style);
-        this.add.existing(label);
-        label.setScore("Highscore", 0);
-        return label;
-    }
-    createScore(x, y, score) {
-        const style = { fontSize: '32px', fill: '#000' };
-        const label = new Score(this, x, y, score, style);
-        this.add.existing(label);
-        label.setScore("Score", 0);
-        return label;
     }
 }
