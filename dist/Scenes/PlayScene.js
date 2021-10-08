@@ -9,6 +9,7 @@ export class PlayScene extends Phaser.Scene {
         super("Play Scene");
         this.dino = undefined;
         this.score = undefined;
+        this.gameSpeed = 0;
     }
     preload() {
         this.load.audio('jump', 'assets/audio/jump.m4a');
@@ -95,7 +96,11 @@ export class PlayScene extends Phaser.Scene {
         }
         if (this.highScore.getScore() % 1000 == 0) {
             this.reachSound.play();
+            this.gameSpeed += 100;
+            console.log(this.gameSpeed);
         }
+        this.obstaclesGroup.setVelocityX(-500 - this.gameSpeed);
+        this.ground.tilePositionX += this.gameSpeed / 80;
         this.obstacles.spawn();
     }
 }

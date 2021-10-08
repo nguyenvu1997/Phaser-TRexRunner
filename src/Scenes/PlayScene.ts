@@ -24,6 +24,7 @@ export class PlayScene extends Phaser.Scene {
     score: Score;
     highScore: Score;
     highScoreText: number;
+    gameSpeed: number;
 
     obstaclesGroup: Phaser.Physics.Arcade.Group;
 
@@ -32,6 +33,7 @@ export class PlayScene extends Phaser.Scene {
 
         this.dino = undefined;
         this.score = undefined;
+        this.gameSpeed = 0;
     }
 
     preload() {
@@ -137,7 +139,11 @@ export class PlayScene extends Phaser.Scene {
         }
         if (this.highScore.getScore() % 1000 == 0){
             this.reachSound.play();
+            this.gameSpeed += 100
+            console.log(this.gameSpeed)
         }
+        this.obstaclesGroup.setVelocityX(-500 - this.gameSpeed)
+        this.ground.tilePositionX += this.gameSpeed/80
 
         this.obstacles.spawn();
     }
